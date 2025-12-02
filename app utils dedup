@@ -1,0 +1,11 @@
+import numpy as np
+seen_hashes = set()
+
+async def is_duplicate(vector: list[float], threshold: float = 0.95) -> bool:
+    vec = np.array(vector)
+    vec_norm = vec / np.linalg.norm(vec)
+    hash_key = tuple(np.round(vec_norm, 4))
+    if hash_key in seen_hashes:
+        return True
+    seen_hashes.add(hash_key)
+    return False
